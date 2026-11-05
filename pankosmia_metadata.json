@@ -1,0 +1,114 @@
+{
+  "id": "textTranslation_dif",
+  "require": {
+    "net": false,
+    "debug": true
+  },
+  "minServerVersion": "0.21.0",
+  "i18n": {
+    "title": {
+      "en": "Text Translation Diff",
+      "fr": "Comparaison de traductions"
+    },
+    "summary": {
+      "en": "Compare two textTranslation burritos word by word with charts.",
+      "fr": "Compare deux burritos textTranslation mot à mot avec des graphiques."
+    },
+    "burrito_a": {
+      "en": "Burrito A",
+      "fr": "Burrito A"
+    },
+    "burrito_b": {
+      "en": "Burrito B",
+      "fr": "Burrito B"
+    },
+    "compare": {
+      "en": "Compare",
+      "fr": "Comparer"
+    },
+    "no_burritos": {
+      "en": "No textTranslation burrito available.",
+      "fr": "Aucun burrito textTranslation disponible."
+    },
+    "select_two": {
+      "en": "Select two different burritos.",
+      "fr": "Sélectionnez deux burritos différents."
+    },
+    "no_common_books": {
+      "en": "These burritos have no book in common.",
+      "fr": "Ces burritos n'ont aucun livre en commun."
+    },
+    "loading": {
+      "en": "Loading books",
+      "fr": "Chargement des livres"
+    },
+    "error": {
+      "en": "Error",
+      "fr": "Erreur"
+    },
+    "rules": {
+      "en": "Words are aligned with a diff, after removing accents, punctuation and capital letters.",
+      "fr": "Les mots sont alignés par un diff, après suppression des accents, de la ponctuation et des majuscules."
+    },
+    "identical": {
+      "en": "Identical",
+      "fr": "Identiques"
+    },
+    "different": {
+      "en": "Different",
+      "fr": "Différents"
+    },
+    "only_a": {
+      "en": "Only in A",
+      "fr": "Seulement dans A"
+    },
+    "only_b": {
+      "en": "Only in B",
+      "fr": "Seulement dans B"
+    },
+    "total_words": {
+      "en": "Compared positions",
+      "fr": "Positions comparées"
+    },
+    "global": {
+      "en": "All books",
+      "fr": "Tous les livres"
+    },
+    "chapter": {
+      "en": "Chapter",
+      "fr": "Chapitre"
+    },
+    "verse": {
+      "en": "Verse",
+      "fr": "Verset"
+    },
+    "book": {
+      "en": "Book",
+      "fr": "Livre"
+    },
+    "count": {
+      "en": "Word count",
+      "fr": "Nombre de mots"
+    },
+    "percent": {
+      "en": "Percent",
+      "fr": "Pourcentage"
+    },
+    "click_hint": {
+      "en": "Click a bar or a row to see the details.",
+      "fr": "Cliquez sur une barre ou une ligne pour voir le détail."
+    },
+    "identical_rate": {
+      "en": "Identical rate",
+      "fr": "Taux d'identiques"
+    },
+    "position": {
+      "en": "Position",
+      "fr": "Position"
+    },
+    "missing": {
+      "en": "(none)",
+      "fr": "(aucun)"
+    }
+  }
+}

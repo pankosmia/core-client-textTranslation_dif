@@ -1,0 +1,13 @@
+allowBuilds:
+  esbuild: true
+minimumReleaseAgeExclude:
+  - pankosmia-rcl@0.4.18 || 0.4.19 || 0.4.22 || 0.7.8 || 0.8.5
+supportedArchitectures:
+  os:
+    - win32
+    - linux
+    - darwin
+    - current
+  cpu:
+    - x64
+    - arm64

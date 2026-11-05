@@ -1,0 +1,33 @@
+{
+  "name": "core-client-textTranslation_dif",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "/clients/textTranslation_dif",
+  "packageManager": "pnpm@11.20.0",
+  "engines": {
+    "node": ">=24",
+    "pnpm": "11.20.0"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^9.3.1",
+    "@mui/material": "^9.3.1",
+    "@mui/system": "^9.3.0",
+    "@mui/x-charts": "^9.17.0",
+    "pankosmia-lib": "^0.0.5",
+    "pankosmia-rcl": "0.8.5",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "text-diff": "^1.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.7"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "node --max_old_space_size=4096 ./node_modules/vite/bin/vite.js build",
+    "dev": "vite"
+  }
+}
