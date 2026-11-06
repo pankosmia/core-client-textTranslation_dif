@@ -7,6 +7,8 @@ export const STATUS_COLORS = {
 
 export const STATUS_KEYS = ["identical", "different", "onlyA", "onlyB"];
 
+export const FULLY_IDENTICAL_COLOR = "#A5D6A7";
+
 export const STATUS_I18N = {
   identical: "identical",
   different: "different",
