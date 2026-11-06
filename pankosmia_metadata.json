@@ -111,12 +111,12 @@
       "fr": "Position"
     },
     "apostrophe_keep": {
-      "en": "Keep U+02BC apostrophe",
-      "fr": "Garder l'apostrophe U+02BC"
+      "en": "Keep apostrophe",
+      "fr": "Garder l'apostrophe "
     },
     "apostrophe_ignore": {
       "en": "Ignore U+02BC apostrophe",
-      "fr": "Ignorer l'apostrophe U+02BC"
+      "fr": "Ignorer l'apostrophe "
     },
     "fully_identical": {
       "en": "100% identical",
