@@ -1,4 +1,3 @@
-import Diff from "text-diff";
 import { normalizeWords } from "./normalize";
 import { parseUsfm } from "./usfm";
 
@@ -20,28 +19,44 @@ export function addStats(target, source) {
 export const totalOf = (stats) =>
   stats.identical + stats.different + stats.onlyA + stats.onlyB;
 
-const differ = new Diff();
-const EQUAL = 0;
-const FIRST_CHAR = 0x4e00;
+// Exact Longest Common Subsequence alignment, O(n*m) time and memory.
+function lcsAlign(wordsA, wordsB) {
+  const n = wordsA.length;
+  const m = wordsB.length;
+  const width = m + 1;
+  // table[i * width + j] = LCS length of wordsA[i..] and wordsB[j..]
+  const table = new Uint32Array((n + 1) * width);
+  for (let i = n - 1; i >= 0; i--) {
+    for (let j = m - 1; j >= 0; j--) {
+      table[i * width + j] =
+        wordsA[i] === wordsB[j]
+          ? table[(i + 1) * width + j + 1] + 1
+          : Math.max(table[(i + 1) * width + j], table[i * width + j + 1]);
+    }
+  }
 
-// Word-level diff: each distinct word becomes one character for text-diff.
+  const operations = [];
+  let i = 0;
+  let j = 0;
+  while (i < n && j < m) {
+    if (wordsA[i] === wordsB[j]) {
+      operations.push(["equal", wordsA[i]]);
+      i++;
+      j++;
+    } else if (table[(i + 1) * width + j] >= table[i * width + j + 1]) {
+      operations.push(["removed", wordsA[i++]]);
+    } else {
+      operations.push(["added", wordsB[j++]]);
+    }
+  }
+  while (i < n) operations.push(["removed", wordsA[i++]]);
+  while (j < m) operations.push(["added", wordsB[j++]]);
+  return operations;
+}
+
+// Word-level comparison based on the LCS of the two word lists.
 export function compareWords(wordsA, wordsB) {
-  const codes = new Map();
-  const words = [];
-  const encode = (list) =>
-    list
-      .map((word) => {
-        if (!codes.has(word)) {
-          codes.set(word, String.fromCharCode(FIRST_CHAR + words.length));
-          words.push(word);
-        }
-        return codes.get(word);
-      })
-      .join("");
-  const decode = (text) =>
-    [...text].map((char) => words[char.charCodeAt(0) - FIRST_CHAR]);
-
-  const operations = differ.main(encode(wordsA), encode(wordsB), false);
+  const operations = lcsAlign(wordsA, wordsB);
   const stats = emptyStats();
   const pairs = [];
   let removed = [];
@@ -66,17 +81,15 @@ export function compareWords(wordsA, wordsB) {
     added = [];
   };
 
-  for (const [operation, text] of operations) {
-    if (operation === EQUAL) {
+  for (const [operation, word] of operations) {
+    if (operation === "equal") {
       flush();
-      for (const word of decode(text)) {
-        pairs.push({ a: word, b: word, status: "identical" });
-        stats.identical += 1;
-      }
-    } else if (operation < 0) {
-      removed.push(...decode(text));
+      pairs.push({ a: word, b: word, status: "identical" });
+      stats.identical += 1;
+    } else if (operation === "removed") {
+      removed.push(word);
     } else {
-      added.push(...decode(text));
+      added.push(word);
     }
   }
   flush();
@@ -111,12 +124,14 @@ export function compareBook(usfmA, usfmB) {
     );
     const chapterStats = emptyStats();
     const verses = verseKeys.map((verse) => {
+      const textA = versesA.get(verse) ?? "";
+      const textB = versesB.get(verse) ?? "";
       const { stats, pairs } = compareWords(
-        normalizeWords(versesA.get(verse) ?? ""),
-        normalizeWords(versesB.get(verse) ?? ""),
+        normalizeWords(textA),
+        normalizeWords(textB),
       );
       addStats(chapterStats, stats);
-      return { verse, stats, pairs };
+      return { verse, stats, pairs, textA, textB };
     });
     addStats(bookStats, chapterStats);
     return { chapter, stats: chapterStats, verses };

@@ -24,6 +24,7 @@ import StatsSummary from "./components/StatsSummary";
 import StackedStatsChart from "./components/StackedStatsChart";
 import VerseDetail from "./components/VerseDetail";
 import { addStats, compareBook, emptyStats, totalOf } from "./lib/compare";
+import { buildCsv, downloadCsv } from "./lib/exportCsv";
 
 const CONCURRENCY = 4;
 
@@ -143,6 +144,21 @@ function App() {
   const dir = infoOf(pathA)?.script_direction === "rtl" ? "rtl" : "ltr";
   const canCompare = pathA && pathB && pathA !== pathB && progress === null;
 
+  function exportCsv() {
+    const headers = [
+      t("book"),
+      t("chapter"),
+      t("verse"),
+      t("identical"),
+      t("different"),
+      t("only_a"),
+      t("only_b"),
+      t("total_words"),
+      t("identical_rate"),
+    ];
+    downloadCsv(buildCsv(books, headers), "textTranslation_dif.csv");
+  }
+
   return (
     <ScrollableBody>
       <Box sx={{ mx: 2, my: 2 }}>
@@ -154,6 +170,9 @@ function App() {
             <BurritoPicker label={t("burrito_b")} value={pathB} options={burritos} onChange={setPathB} />
             <Button variant="contained" disabled={!canCompare} onClick={compare}>
               {t("compare")}
+            </Button>
+            <Button variant="outlined" disabled={!books?.length} onClick={exportCsv}>
+              {t("export_csv")}
             </Button>
             {pathA === pathB && <Typography color="warning.main">{t("select_two")}</Typography>}
           </Box>

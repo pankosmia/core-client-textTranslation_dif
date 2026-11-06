@@ -26,6 +26,10 @@
       "en": "Compare",
       "fr": "Comparer"
     },
+    "export_csv": {
+      "en": "Export CSV",
+      "fr": "Exporter en CSV"
+    },
     "no_burritos": {
       "en": "No textTranslation burrito available.",
       "fr": "Aucun burrito textTranslation disponible."
@@ -47,8 +51,8 @@
       "fr": "Erreur"
     },
     "rules": {
-      "en": "Words are aligned with a diff, after removing accents, punctuation and capital letters.",
-      "fr": "Les mots sont alignés par un diff, après suppression des accents, de la ponctuation et des majuscules."
+      "en": "Words are aligned with a Longest Common Subsequence (LCS), after removing accents, punctuation and capital letters.",
+      "fr": "Les mots sont alignés par plus longue sous-séquence commune (LCS), après suppression des accents, de la ponctuation et des majuscules."
     },
     "identical": {
       "en": "Identical",
