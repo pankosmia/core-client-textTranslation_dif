@@ -23,11 +23,14 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
+    "husky": "^9.1.7",
+    "prettier": "^3.9.10",
     "vite": "^6.0.7"
   },
   "scripts": {
     "start": "vite",
-    "build": "node --max_old_space_size=4096 ./node_modules/vite/bin/vite.js build",
-    "dev": "vite"
+    "build": "vite build",
+    "dev": "vite",
+    "prepare": "husky"
   }
 }
