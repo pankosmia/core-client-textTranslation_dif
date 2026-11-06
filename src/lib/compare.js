@@ -108,7 +108,7 @@ function toMap(chapters) {
 }
 
 // Compares one book chapter by chapter and verse by verse.
-export function compareBook(usfmA, usfmB) {
+export function compareBook(usfmA, usfmB, keepModifierApostrophe = true) {
   const mapA = toMap(parseUsfm(usfmA));
   const mapB = toMap(parseUsfm(usfmB));
   const chapterKeys = [...new Set([...mapA.keys(), ...mapB.keys()])].sort(
@@ -127,8 +127,8 @@ export function compareBook(usfmA, usfmB) {
       const textA = versesA.get(verse) ?? "";
       const textB = versesB.get(verse) ?? "";
       const { stats, pairs } = compareWords(
-        normalizeWords(textA),
-        normalizeWords(textB),
+        normalizeWords(textA, keepModifierApostrophe),
+        normalizeWords(textB, keepModifierApostrophe),
       );
       addStats(chapterStats, stats);
       return { verse, stats, pairs, textA, textB };
